@@ -42,7 +42,7 @@ npm run dev
 - Code is separated clearly by responsibility and uses TypeScript types throughout
 
 ## Future Improvements
-- Add unit and integration testing
+- Add more unit tests and add integration testing
 - Add more types 
 - Color contrast is not accesssible
 - Add hourly and multi-day forecasts using additional API timelines
