@@ -20,7 +20,7 @@ const Footer = () => (
         letterSpacing: "0.4px",
       }}
     >
-      Reliable. Responsive. Slightly obsessed with clouds.
+      Footer
     </Typography>
   </Box>
 );

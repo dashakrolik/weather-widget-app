@@ -1,6 +1,5 @@
 "use client";
 import WeatherIcon from "./WeatherIcon";
-
 import {
   Card,
   CardContent,
@@ -48,20 +47,28 @@ const WeatherWidget: React.FC<Props> = ({
         justifyContent: "space-between",
       }}
     >
-      {loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flex: 1,
-          }}
-        >
-          <CircularProgress />
-        </Box>
-      ) : (
-        <form style={{ flex: 1, display: "flex", flexDirection: "column" }}>
-          <CardContent sx={{ flex: 1 }}>
+      <CardContent
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flex: 1,
+              minHeight: 220, // ✅ Reserve height based on your content size
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        ) : (
+          <>
             <Typography variant="h5" gutterBottom>
               Weather in {city}
             </Typography>
@@ -74,23 +81,30 @@ const WeatherWidget: React.FC<Props> = ({
             >
               {temperature}°C
             </Typography>
-
             <Typography variant="body1" sx={{ mb: 1.5 }}>
               Humidity: {humidity}%
             </Typography>
             <Typography variant="body1" sx={{ mb: 2 }}>
               Wind: {windSpeed} m/s
             </Typography>
-          </CardContent>
-          <Box sx={{ marginTop: "auto", paddingX: 3, paddingBottom: 1 }}>
-            <Typography variant="body2" color="text.secondary">
-              {temperature >= 15
-                ? "Remember to put on some SPF!"
-                : "Brr...winter is already here, time to wear a jacket."}
-            </Typography>
-          </Box>
-        </form>
-      )}
+          </>
+        )}
+      </CardContent>
+
+      <Box
+        sx={{
+          marginTop: "auto",
+          paddingX: 3,
+          paddingBottom: 1,
+          visibility: loading ? "hidden" : "visible",
+        }}
+      >
+        <Typography variant="body2" color="text.secondary">
+          {temperature >= 15
+            ? "Remember to put on some SPF!"
+            : "Brr...winter is already here, time to wear a jacket."}
+        </Typography>
+      </Box>
     </Card>
   </Box>
 );
