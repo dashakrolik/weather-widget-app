@@ -62,7 +62,7 @@ const WeatherWidget: React.FC<Props> = ({
               justifyContent: "center",
               alignItems: "center",
               flex: 1,
-              minHeight: 220, // ✅ Reserve height based on your content size
+              minHeight: 220,
             }}
           >
             <CircularProgress />
