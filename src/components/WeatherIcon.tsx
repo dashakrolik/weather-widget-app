@@ -19,7 +19,7 @@ const weatherCodeToIcon: Record<number, string> = {
   4201: "Cloud-Hail.svg", // heavy rain
   5000: "Cloud-Snow-Alt.svg", // snow
   5100: "Cloud-Snow-Alt.svg",
-  5101: "Cloud-Snow-Alt.svg",// ?
+  5101: "Cloud-Snow-Alt.svg", // ?
   8000: "Cloud-Hail.svg", // thunderstorm
 };
 
@@ -40,13 +40,34 @@ const weatherCodeToColor: Record<number, string> = {
   8000: "#673AB7",
 };
 
+// Helper for alt text
+const weatherCodeToLabel: Record<number, string> = {
+  1000: "Clear sky",
+  1001: "Cloudy",
+  1100: "Mostly clear",
+  1101: "Partly cloudy",
+  1102: "Cloudy",
+  2000: "Fog",
+  4000: "Drizzle",
+  4001: "Rain",
+  4200: "Light rain",
+  4201: "Heavy rain",
+  5000: "Snow",
+  5100: "Light snow",
+  5101: "Heavy snow",
+  8000: "Thunderstorm",
+};
+
 const WeatherIcon: React.FC<WeatherIconProps> = ({ weatherCode, size = 64 }) => {
   const iconFile = weatherCodeToIcon[weatherCode] || "Cloud.svg";
   const baseColor = weatherCodeToColor[weatherCode] || "#4ca1af";
+  const label = weatherCodeToLabel[weatherCode] || "Unknown weather condition";
   const containerSize = size * 1.1;
 
   return (
     <Box
+      role="img"
+      aria-label={label}
       sx={{
         width: containerSize,
         height: containerSize,
@@ -61,7 +82,7 @@ const WeatherIcon: React.FC<WeatherIconProps> = ({ weatherCode, size = 64 }) => 
     >
       <Image
         src={`/icons/${iconFile}`}
-        alt="Weather icon"
+        alt={label}
         width={size}
         height={size}
       />

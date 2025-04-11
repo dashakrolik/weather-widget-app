@@ -5,6 +5,8 @@ import axios from "axios";
 import { Box, Snackbar, Alert } from "@mui/material";
 import WeatherForm from "@/components/WeatherForm";
 import WeatherWidget from "@/components/WeatherWidget";
+import WeatherTicker from "./WeatherTicker";
+import Header from "./Header";
 
 interface WeatherData {
   temperature: number;
@@ -48,6 +50,7 @@ export default function WeatherPage() {
 
   return (
     <main>
+      <Header />
       <Box
         sx={{
           display: "flex",
@@ -83,7 +86,7 @@ export default function WeatherPage() {
           onClose={() => setToast(null)}
           sx={{
             backgroundColor: toast?.type === "error" ? "#ff5252" : "#4ca1af",
-            color: '#3b8c98',
+            color: 'white',
             fontFamily: '"Manrope", sans-serif',
             borderRadius: "8px",
           }}
@@ -91,6 +94,7 @@ export default function WeatherPage() {
           {toast?.message}
         </Alert>
       </Snackbar>
+      <WeatherTicker />
     </main>
   );
 }

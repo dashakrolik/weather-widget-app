@@ -26,6 +26,8 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
 
   return (
     <Box
+      component="section"
+      aria-label="City search"
       sx={{
         display: "flex",
         justifyContent: "center",
@@ -49,13 +51,23 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
       >
         <form
           onSubmit={handleSubmit}
+          role="form"
+          aria-labelledby="city-form-title"
           style={{ flex: 1, display: "flex", flexDirection: "column" }}
         >
           <CardContent sx={{ paddingBottom: 0 }}>
-            <Typography variant="h6" gutterBottom pb={2} justifySelf='center'>
+            <Typography
+              id="city-form-title"
+              variant="h6"
+              gutterBottom
+              pb={2}
+              justifySelf="center"
+            >
               Enter a city to get the weather
             </Typography>
             <TextField
+              id="city"
+              name="city"
               fullWidth
               label="City"
               variant="outlined"
@@ -69,6 +81,7 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
               type="submit"
               variant="contained"
               fullWidth
+              aria-label="Get forecast for entered city"
               sx={{
                 textTransform: "none",
                 backgroundColor: "#4ca1af",

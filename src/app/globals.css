@@ -19,6 +19,7 @@ body {
   height: 100%; /* ← this ensures the gradient can stretch full viewport */
   max-width: 100%;
   overflow-x: hidden;
+  margin: 0;
 }
 
 body {
