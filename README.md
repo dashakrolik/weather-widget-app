@@ -32,7 +32,7 @@ npm install
 npm run dev
 ```
 
-2. Add your own weather.io API Key in your local .env, as "TOMORROW_API_KEY" 
+2. Add your own weather.io API Key in your local .env.local, as "TOMORROW_API_KEY" 
 
 ## Developer Notes
 - Weather data is fetched server-side to keep the API key secure
