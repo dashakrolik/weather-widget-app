@@ -25,16 +25,14 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
   };
 
   return (
-<Box
-  sx={{
-    display: "flex",
-    justifyContent: "center",
-    padding: 2,
-    width: "100%",
-  }}
->
-
-
+    <Box
+      sx={{
+        display: "flex",
+        justifyContent: "center",
+        padding: 2,
+        width: "100%",
+      }}
+    >
       <Card
         sx={{
           width: 360,
@@ -54,7 +52,7 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
           style={{ flex: 1, display: "flex", flexDirection: "column" }}
         >
           <CardContent sx={{ paddingBottom: 0 }}>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="h6" gutterBottom pb={2} justifySelf='center'>
               Enter a city to get the weather
             </Typography>
             <TextField
@@ -76,9 +74,9 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
                 backgroundColor: "#4ca1af",
                 color: "#ffffff",
                 fontWeight: 500,
-                borderRadius: "999px", // ✅ fully rounded pill-style
+                borderRadius: "999px",
                 boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
-                paddingY: 1.25, // extra vertical padding for roundness
+                paddingY: 1.25,
                 transition: "all 0.3s ease",
                 "&:hover": {
                   backgroundColor: "#3a8d9e",

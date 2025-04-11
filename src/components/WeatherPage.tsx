@@ -1,15 +1,16 @@
 "use client";
 
-import WeatherForm from "@/components/WeatherForm";
-import WeatherWidget from "@/components/WeatherWidget";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Box } from "@mui/material";
+import { Box, Snackbar, Alert } from "@mui/material";
+import WeatherForm from "@/components/WeatherForm";
+import WeatherWidget from "@/components/WeatherWidget";
 
 interface WeatherData {
   temperature: number;
   humidity: number;
   windSpeed: number;
+  weatherCode: number;
 }
 
 export default function WeatherPage() {
@@ -17,51 +18,79 @@ export default function WeatherPage() {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
-  // useEffect(() => {
-  //   const fetchWeather = async () => {
-  //     try {
-  //       setLoading(true);
-  //       const res = await axios.get(`/api/weather?city=${city}`);
-  //       setWeather(res.data);
-  //       setError(null);
-  //     } catch (err: any) {
-  //       setError("Failed to load weather.");
-  //       setWeather(null);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
+  const fetchWeather = async () => {
+    try {
+      setLoading(true);
+      const res = await axios.get(`/api/weather?city=${city}`);
+      setWeather(res.data);
+      setError(null);
+      setToast({ message: `Weather updated for ${city}`, type: "success" });
+    } catch (err: any) {
+      setWeather(null);
+      const msg = err?.response?.status === 429 ? "Too many requests – try again soon" : "City not found";
+      setError(msg);
+      setToast({ message: msg, type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  //   if (city) fetchWeather();
-  // }, [city]);
+  useEffect(() => {
+    fetchWeather();
+  }, [city]);
+
+  useEffect(() => {
+    setToast({ message: "Test toast loaded!", type: "success" });
+  }, []);
+  
 
   return (
     <main>
-<Box
-  sx={{
-    display: "flex",
-    flexDirection: { xs: "column", md: "row" },
-    justifyContent: "center",
-    alignItems: "flex-start", // ⬅️ important: prevents vertical stretching
-    padding: 4,
-    gap: { xs: 3, md: 6 },
-  }}
->
-
-
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 3,
+          padding: 4,
+        }}
+      >
         <WeatherForm onCityChange={setCity} />
-        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
-        {true && (
+        {weather && (
           <WeatherWidget
-            temperature={10}
-            humidity={5}
-            windSpeed={3}
+            temperature={weather.temperature}
+            humidity={weather.humidity}
+            windSpeed={weather.windSpeed}
             city={city}
+            weatherCode={weather.weatherCode}
             loading={loading}
           />
         )}
       </Box>
+
+      {/* ✅ Toast/Alert */}
+      <Snackbar
+        open={!!toast}
+        autoHideDuration={4000}
+        onClose={() => setToast(null)}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          severity={toast?.type || "success"}
+          onClose={() => setToast(null)}
+          sx={{
+            backgroundColor: toast?.type === "error" ? "#ff5252" : "#4ca1af",
+            color: '#3b8c98',
+            fontFamily: '"Manrope", sans-serif',
+            borderRadius: "8px",
+          }}
+        >
+          {toast?.message}
+        </Alert>
+      </Snackbar>
     </main>
   );
 }

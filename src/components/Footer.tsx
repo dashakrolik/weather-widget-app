@@ -6,7 +6,6 @@ const Footer = () => (
   <Box
     sx={{
       width: "100%",
-      // background: "linear-gradient(90deg, #f0f4f8, #f9fbfc)",
       padding: "1.5rem 1rem",
       borderBottom: "1px solid #e2e8f0",
       boxShadow: "0 2px 6px rgba(0, 0, 0, 0.05)",

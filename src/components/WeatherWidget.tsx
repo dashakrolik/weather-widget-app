@@ -1,4 +1,5 @@
 "use client";
+import WeatherIcon from "./WeatherIcon";
 
 import {
   Card,
@@ -14,6 +15,7 @@ interface Props {
   windSpeed: number;
   city: string;
   loading: boolean;
+  weatherCode: number;
 }
 
 const WeatherWidget: React.FC<Props> = ({
@@ -21,18 +23,17 @@ const WeatherWidget: React.FC<Props> = ({
   humidity,
   windSpeed,
   city,
+  weatherCode,
   loading,
 }) => (
-<Box
-  sx={{
-    display: "flex",
-    justifyContent: "center",
-    padding: 2,
-    width: "100%",
-  }}
->
-
-
+  <Box
+    sx={{
+      display: "flex",
+      justifyContent: "center",
+      padding: 2,
+      width: "100%",
+    }}
+  >
     <Card
       sx={{
         width: 360,
@@ -49,19 +50,31 @@ const WeatherWidget: React.FC<Props> = ({
     >
       {loading ? (
         <Box
-          sx={{ display: "flex", justifyContent: "center", alignItems: "center", flex: 1 }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+          }}
         >
           <CircularProgress />
         </Box>
       ) : (
         <form style={{ flex: 1, display: "flex", flexDirection: "column" }}>
           <CardContent sx={{ flex: 1 }}>
-            <Typography variant="h5"  gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Weather in {city}
             </Typography>
-            <Typography variant="h2" color="primary" fontWeight="bold" mb={2}>
+            <WeatherIcon weatherCode={weatherCode} size={128} />
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              mb={2}
+              sx={{ color: "#4ca1af" }}
+            >
               {temperature}°C
             </Typography>
+
             <Typography variant="body1" sx={{ mb: 1.5 }}>
               Humidity: {humidity}%
             </Typography>
@@ -72,8 +85,8 @@ const WeatherWidget: React.FC<Props> = ({
           <Box sx={{ marginTop: "auto", paddingX: 3, paddingBottom: 1 }}>
             <Typography variant="body2" color="text.secondary">
               {temperature >= 15
-                ? "Remember to put on some SPF"
-                : "Brrr...winter is already here, time to wear a jacket"}
+                ? "Remember to put on some SPF!"
+                : "Brr...winter is already here, time to wear a jacket."}
             </Typography>
           </Box>
         </form>

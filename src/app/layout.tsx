@@ -1,7 +1,7 @@
 import "@fontsource/manrope";
 import "./globals.css";
 import React from "react";
-import ThemeRegistry from "./ThemeRegistry"; // ✅ use the client wrapper
+import ThemeRegistry from "./ThemeRegistry";
 
 export const metadata = {
   title: "Weather App",
