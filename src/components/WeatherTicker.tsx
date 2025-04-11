@@ -46,8 +46,6 @@ const WeatherTicker = () => {
           </Box>
         ))}
       </Box>
-
-      {/* Add keyframes via global style override */}
       <style jsx global>{`
         @keyframes scroll {
           0% {

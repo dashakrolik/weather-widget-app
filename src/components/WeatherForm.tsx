@@ -39,6 +39,7 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
         sx={{
           width: 360,
           minHeight: 280,
+          height: '390px',
           margin: "0 auto",
           padding: 3,
           boxShadow: "0 12px 28px rgba(0, 0, 0, 0.1)",
@@ -46,14 +47,18 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
           backgroundColor: "#e1edf4",
           display: "flex",
           flexDirection: "column",
-          justifyContent: "space-between",
         }}
       >
         <form
           onSubmit={handleSubmit}
           role="form"
           aria-labelledby="city-form-title"
-          style={{ flex: 1, display: "flex", flexDirection: "column" }}
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flex: 1,
+            justifyContent: "space-between",
+          }}
         >
           <CardContent sx={{ paddingBottom: 0 }}>
             <Typography
@@ -61,7 +66,6 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
               variant="h6"
               gutterBottom
               pb={2}
-              justifySelf="center"
             >
               Enter a city to get the weather
             </Typography>
@@ -76,7 +80,8 @@ const WeatherForm: React.FC<WeatherFormProps> = ({ onCityChange }) => {
               sx={{ marginBottom: 2 }}
             />
           </CardContent>
-          <Box sx={{ marginTop: "auto" }}>
+
+          <Box sx={{ paddingX: 2, paddingBottom: 1 }}>
             <Button
               type="submit"
               variant="contained"

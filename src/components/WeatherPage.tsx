@@ -43,38 +43,31 @@ export default function WeatherPage() {
     fetchWeather();
   }, [city]);
 
-  useEffect(() => {
-    setToast({ message: "Test toast loaded!", type: "success" });
-  }, []);
-  
-
   return (
     <main>
       <Header />
+
       <Box
         sx={{
           display: "flex",
           flexDirection: { xs: "column", md: "row" },
           justifyContent: "center",
-          alignItems: "center",
+          alignItems: "stretch",
           gap: 3,
           padding: 4,
+          minHeight: 320,
         }}
       >
         <WeatherForm onCityChange={setCity} />
-        {weather && (
-          <WeatherWidget
-            temperature={weather.temperature}
-            humidity={weather.humidity}
-            windSpeed={weather.windSpeed}
-            city={city}
-            weatherCode={weather.weatherCode}
-            loading={loading}
-          />
-        )}
+        <WeatherWidget
+          temperature={weather?.temperature ?? 0}
+          humidity={weather?.humidity ?? 0}
+          windSpeed={weather?.windSpeed ?? 0}
+          city={city}
+          weatherCode={weather?.weatherCode ?? 1001}
+          loading={loading}
+        />
       </Box>
-
-      {/* ✅ Toast/Alert */}
       <Snackbar
         open={!!toast}
         autoHideDuration={4000}
@@ -86,7 +79,7 @@ export default function WeatherPage() {
           onClose={() => setToast(null)}
           sx={{
             backgroundColor: toast?.type === "error" ? "#ff5252" : "#4ca1af",
-            color: 'white',
+            color: "white",
             fontFamily: '"Manrope", sans-serif',
             borderRadius: "8px",
           }}
@@ -94,6 +87,7 @@ export default function WeatherPage() {
           {toast?.message}
         </Alert>
       </Snackbar>
+
       <WeatherTicker />
     </main>
   );
