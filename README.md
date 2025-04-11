@@ -23,16 +23,15 @@ A modern, responsive weather forecast app built with Next.js, TypeScript, and Ma
 
 ## Setup Instructions
 
-1. **Clone the repository**
+1. **Clone the repository, install dependencies and run the app**
 
 ```bash
-git clone https://github.com/your-username/weather-app.git
 cd weather-app
 npm install
 npm run dev
 ```
 
-2. Add your own weather.io API Key in your local .env.local, as "TOMORROW_API_KEY" 
+2. **Add your own weather.io API Key in your local .env.local, as "TOMORROW_API_KEY"**
 
 ## Developer Notes
 - Weather data is fetched server-side to keep the API key secure
